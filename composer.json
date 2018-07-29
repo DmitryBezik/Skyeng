@@ -1,0 +1,25 @@
+{
+    "name": "Skyeng/TestTask",
+    "description": "Test task for Skyeng",
+    "homepage": "https://github.com/DmitryBezik/Skyeng",
+    "type": "library",
+    "authors": [
+        {
+            "name": "DmitryBezik",
+            "email": "DmitryBezik@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    },
+    "require": {
+        "php": "7.2.*",
+        "roave/security-advisories": "dev-master",
+        "psr/cache": "1.0.1",
+        "psr/log": "1.0.2"
+    },
+    "minimum-stability": "dev",
+    "license": "MIT"
+}
