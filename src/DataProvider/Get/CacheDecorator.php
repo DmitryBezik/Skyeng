@@ -2,15 +2,12 @@
 
 namespace src\DataProvider\Get;
 
-use src\DataProvider\Set\DataProviderSetInterface;
-use src\DataProvider\Set\Exception\DataProviderSetErrorException;
-
 final class CacheDecorator implements DataProviderGetInterface
 {
     /**
-     * @var DataProviderGetInterface
+     * @var Cache
      */
-    private $cacheGetter;
+    private $cache;
 
     /**
      * @var DataProviderGetInterface
@@ -18,23 +15,15 @@ final class CacheDecorator implements DataProviderGetInterface
     private $getter;
 
     /**
-     * @var DataProviderSetInterface
-     */
-    private $cacheSetter;
-
-    /**
-     * @param DataProviderGetInterface $cacheGetter
+     * @param Cache $cache
      * @param DataProviderGetInterface $getter
-     * @param DataProviderSetInterface $cacheSetter
      */
     public function __construct(
-        DataProviderGetInterface $cacheGetter,
-        DataProviderGetInterface $getter,
-        DataProviderSetInterface $cacheSetter
+        Cache $cache,
+        DataProviderGetInterface $getter
     ) {
-        $this->cacheGetter = $cacheGetter;
+        $this->cache = $cache;
         $this->getter = $getter;
-        $this->cacheSetter = $cacheSetter;
     }
 
     /**
@@ -42,13 +31,13 @@ final class CacheDecorator implements DataProviderGetInterface
      */
     public function get(array $request): array
     {
-        if ($result = $this->cacheGetter->get($request)) {
+        if ($result = $this->cache->get($request)) {
             return $result;
         }
 
         $result = $this->getter->get($request);
 
-        $this->cacheSetter->set($request, $result);
+        $this->cache->set($request, $result);
 
         return $result;
     }

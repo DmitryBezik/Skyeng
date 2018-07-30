@@ -1,6 +1,6 @@
 <?php
 
-namespace src\DataProvider\Set\Exception;
+namespace src\DataProvider\Get\Exception;
 
 use RuntimeException;
 
